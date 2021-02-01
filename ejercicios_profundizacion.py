@@ -11,11 +11,13 @@ Programa creado para que practiquen los conocimietos
 adquiridos durante la semana
 '''
 
-__author__ = "Inove Coding School"
-__email__ = "alumnos@inove.com.ar"
+__author__ = "Pedro Luis Lugo Garcia"
+__email__ = "pllugo@gmail.com"
 __version__ = "1.1"
 
 import numpy as np
+import random
+import math
 
 
 def ej1():
@@ -41,6 +43,16 @@ def ej1():
 
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
+    while True:
+        lista = [random.randint(1, 10) for x in range(3)]
+        vector = np.asanyarray(lista)
+        suma = np.sum(vector)
+        if suma <= 21:
+            print(suma)
+            print(vector)
+            break
+        else:
+            continue
 
 
 def ej2():
@@ -63,7 +75,20 @@ def ej2():
 
     # Se espera obtener:
     # ['Tamara', 'Juan', 'Alberto'......]
+    # De forma sin compresión de listas
+    lista_nueva = []
+    for i in range(len(nombres)):
+        for j in range(len(padron)):
+            if padron[j] in nombres[i]:
+                lista_nueva.append(nombres[i])
+            else:
+                continue
+    print(lista_nueva)
 
+    #De forma con compresión de listas
+    nombres_filtrados = [x for x in nombres if x[0] in padron]
+    print(nombres_filtrados)
+        
 
 def ej3():
     print("Un poco de Numpy!")
@@ -74,22 +99,27 @@ def ej3():
 
     # Conjunto de valores "X" en un array
     x = np.arange(0, 2*np.pi, 0.1)
+    print(x)
 
     # Utilizar la función np.sin para someter cada valor de "X",
     # obtenga el array "y_nump" que tenga los resultados
     # NO utilizar comprensión de listas, solo utilice la
     # funcion de numpy "np.sin"
 
-    # y_nump =
+    y_nump = np.sin(x)
+    print("Esta es la lista con la función np:\n")
+    print(y_nump)
 
     # Conjunto de valores "X" en una lista
-    x = list(np.arange(0, 2*np.pi, 0.1))
+    x = list(np.arange(0, 2*math.pi, 0.1))
 
     # Utilizar comprensión de listas para obtener la lista
     # "y_list" que tenga todos los valores obtenidos como resultado
     # de someter cada valor de "X" a la función math.sin
 
-    # y_list =
+    y_list = [math.sin(n) for n in x]
+    print("Esta es la lista con la función math:\n")
+    print(y_list)
 
     # Este es un ejemplo práctico de cuando es útil usar numpy,
     # basicamente siempre que deseen utilizar una función matemática
@@ -123,6 +153,33 @@ def ej4():
     # de condicionales PERO recomendamos leer atentamente el método "get"
     # de diccionarios que tiene un parametro configurable respecto
     # que sucede sino encuentra la "key" en el diccionario.
+    lista_compra_productos = [{x: producto.get(x, 'NaN')} for x in lista_compra_id]
+    print(lista_compra_productos)
+
+
+def jugar(): #Función para jugar Black Jack!!  
+        lista_aleatorios = [random.randint(1,11) for x in range(2)]
+        vector = np.asanyarray(lista_aleatorios)
+        print(vector)
+        suma = np.sum(vector)
+        print(suma)
+        while True:
+            if suma >= 21:
+                print("Parar el juego")
+                break
+            else:
+                opcion_usuario = int(input(""" Ingrese:
+                            1 Para continuar lanzando cartas
+                            2 Para parar el juego\n"""))
+                if opcion_usuario == 1:
+                    lista_aleatorios = [random.randint(1,11) for x in range(2)]
+                    vector = np.append(vector, np.asanyarray(lista_aleatorios))
+                    print(vector)
+                    suma = np.sum(vector)
+                    print(suma)
+                else:
+                    break
+        return suma
 
 
 def ej5():
@@ -147,12 +204,25 @@ def ej5():
     dos jugadores y compitan para ver quien sacá la suma de números
     más cercanos a 21 sin pasarse!
     '''
+    
+    jugadores = int(input("Ingrese la cantidad de jugadores:\n"))
+    resultado = [jugar() for x in range(jugadores)] #Genero una lista de los resultados de jugar Black Jack
+    print(resultado)
+    vector_resultado = np.asanyarray(resultado) #Transformo la lista a un vector
+    nuevo_array = np.where((vector_resultado <= 21), vector_resultado, 0) #Busco los menores o iguales a 21
+    print(nuevo_array)
+    valor_cercano = max(nuevo_array) #Busco el maximo valor de los resultados de los jugadores
+    if valor_cercano == 0:
+        print("Nadie gana")
+    else:
+        print("El jugador que lanzo {} es el ganador".format(valor_cercano)) #El ganador es el maximo valor mas cercano a 21
+
 
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    # ej1()
+    #ej1()
     # ej2()
     # ej3()
     # ej4()
-    # ej5()
+    ej5()

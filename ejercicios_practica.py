@@ -11,12 +11,13 @@ Programa creado para poner a prueba los conocimientos
 adquiridos durante la clase
 '''
 
-__author__ = "Inove Coding School"
-__email__ = "alumnos@inove.com.ar"
+__author__ = "Pedro Luis Lugo Garcia"
+__email__ = "pllugo@gmail.com"
 __version__ = "1.2"
 
 import numpy as np
 import math
+import random
 
 
 def ej1():
@@ -24,7 +25,10 @@ def ej1():
     # 1)
     # Realizar una funcion lambda que eleve al cuadrado
     # el número pasado como parámetro
-
+    potencia = lambda a: 2*a
+    x = int(input("Ingrese el número:\n"))
+    potencia_2 = potencia(x)
+    print(potencia_2)
     # potencia_2 = lambda x:......
     # pot_3 = potencia_2(3)
 
@@ -41,6 +45,9 @@ def ej1():
 
     # Lista de numeros
     numeros = [1, -5, 4, 3]
+    numeros_potencia = list(map(lambda a: 2*a, numeros))
+    print(numeros_potencia)
+    
 
     # numeros_potencia = list(map....)
 
@@ -50,7 +57,9 @@ def ej2():
     # 1)
     # Realizar una funcion lambda que retorne el tamaño
     # (len) de un string pasado como parámetro
-
+    len_string = lambda palabra: len(palabra)
+    texto = str(input("Ingrese la palabra:\n"))
+    print("La palabra tiene {} letras".format(len_string(texto)))
     # len_string = lambda......
 
     # 2)
@@ -67,7 +76,8 @@ def ej2():
     # NOTA: No debe usar "len_string" dentro del map, debe colocar
     # directamente la lambda.
 
-    # palabras_len = list(map....)
+    palabras_len = list(map(lambda palabra: len(palabra), palabras))
+    print(palabras_len)
 
 
 def ej3():
@@ -76,7 +86,9 @@ def ej3():
     # Generar una lista a partir de comprensión de listas,
     # esta lista generada deberá tener un tamaño de 11
     # números, conteniendo del 0 al 10 inclusive
-
+    lista_0_10 = [x for x in range(0, 11)]
+    print(lista_0_10)
+    print(len(lista_0_10))
     # lista_0_10 = [......]
 
     # 2)
@@ -90,7 +102,8 @@ def ej3():
     # del 0 al 10 (como el ejer anterior) pero que cada
     # elemento lo multipliquen x5.
 
-    # tabla_5 = [......]
+    tabla_5 = [5 * x for x in range(0, 11)]
+    print(tabla_5)
 
     # 3)
     # Generar una lista a partir de comprensión de listas,
@@ -100,8 +113,9 @@ def ej3():
     # NOTA: Importar le módulo random y utiliza randrange
     # o randint para generar números aleatorios.
     # https://docs.python.org/3/library/random.html
-
-    # dias_mes = [.....]
+    dias_mes = [random.randint(1, 31) for x in range(10)]
+    print(dias_mes)
+    #  = [.....]
 
     pass
 
@@ -119,7 +133,10 @@ def ej4():
     # TIP: Recomendamos ver el método "isdigit" de strings
     # para aplicar en este caso.
     list_numeros_str = ['5', '2', '3', '', '7', 'NaN']
-
+    lista_filtrada = [x if x.isdigit() is True else 0 for x in list_numeros_str]
+    lista_negativos = [-1*x if x.isdigit() is True else 0 for x in list_numeros_str]
+    print(lista_filtrada)
+    print(lista_negativos)
 
     # ¿Ya terminaron el ejercicio? ¿Por qué no prueban
     # hacer negativo alguno de los números de la lista?
@@ -142,7 +159,10 @@ def ej5():
     # De la lista resultante informar cuantas personas/personal
     # comprendido en dicho rango pasó por ese molinete
 
-    # personal_1_10 = [.....]
+    personal_1_10 = [x for x in accesos if (x <= 10)]
+    print(personal_1_10)
+    print("La cantidad de personas con ID 1-10 son: {}".format(len(personal_1_10)))
+    
 
     # 2)
     # Generar una lista por comprensión de la listas "accesos"
@@ -154,7 +174,8 @@ def ej5():
     # TIP: Utilizar el operador "in" para chequear si un ID de accesos está
     # dentro de "id_validos"
 
-    # personal_valido = [.....]
+    personal_valido = [x for x in accesos if x in id_validos]
+    print("La lista filtrada es: {}".format(personal_valido))
     pass
 
 
@@ -163,18 +184,21 @@ def ej6():
     # Arme un array con el método np.arange
     # el cual este acotado entre 0 y 1000
     # De dicho array calcular las siguientes operaciones:
-
+    v1 = np.arange(0,1001)
+    print(v1)
     # 1)
     # Calcular la suma de todos los elementos en el array
     # utilizar el método "sum" de numpy
 
-    # suma = ....
+    suma = np.sum(v1)
+    print(suma)
 
     # 2)
     # Calcular la diferencia de todos los elementos en el array
     # utilizar el método "diff" de numpy
 
-    # diferencia = ....
+    diferencia = np.diff(v1)
+    print(diferencia)
 
     # 3)
     # Utilizar la funcion "where" para reemplazar los números múltiplos
@@ -183,7 +207,8 @@ def ej6():
     # múltiplo de "5"? Ese operador ya lo conoce y lo viene utilizando
     # bastante para saber si un número es múltiplo de "2"
 
-    # nuevo_array = ....
+    nuevo_array = np.where((v1 % 5 == 0), v1, 0)
+    print(nuevo_array)
     pass
 
 
